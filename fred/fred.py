@@ -3,6 +3,16 @@ import serial
 import pygame
 import sys
 import logging
+import socket
+
+def sendMessage(message):
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect(('localhost', 12345))
+        s.send('%s' % message)
+        s.close()
+    except Exception, e:
+        pass
 
 ser = serial.Serial("/dev/alfie", 9600)
 
@@ -25,7 +35,8 @@ ch.setLevel(logging.DEBUG)
 ch.setFormatter(formatter)
 logger.addHandler(ch)
 
-print("FRED 0.4")
+logging.info("FRED 0.4")
+sendMessage('#hacmantest ALFRED Rebooted')
 
 while 1:
     card_id = ser.readline().strip()
@@ -34,6 +45,7 @@ while 1:
         if not pygame.mixer.music.get_busy():
             pygame.mixer.music.play()
             logging.info('Buzzer')
+            sendMessage('Buzzer')
     else:
         logging.info("Card ID: %s", card_id)
         found = False
@@ -42,12 +54,13 @@ while 1:
         members = members_f.readlines()
     
         for member in members:
-            member = member.split(',')
+            member = member.strip().split(',')
             if card_id in member[0]:
                 ser.write('1')
                 ser.write('G')
                 found = True
                 logging.info("%s found, %s opened the door!", card_id, member[1])
+                sendMessage("%s opened the hackspace door!" % member[1])
 
         if not found:
             ser.write('R')
