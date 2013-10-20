@@ -1,3 +1,3 @@
 #!/bin/bash
-cd /root/FRED/fred
+cd /home/alfred/FRED/fred
 python fred.py
