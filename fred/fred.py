@@ -64,7 +64,7 @@ while 1:
     elif (config['hardware']['version'] == 'old' and card_id != '00000000000000') or (card_id[0] == 'C'):
 	if config['hardware']['version'] == 'new':
 		card_id = card_id[1:]
-        	if card_id[0:1] == '88':
+        	if card_id[0:2] == '88':
                 	card_id = card_id[2:]
 
 
