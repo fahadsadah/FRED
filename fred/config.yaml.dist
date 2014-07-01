@@ -1,5 +1,5 @@
+mqtt_name: alfred_outer
 door:
   name: outer
-  mqtt_name: alfred_outer
 hardware:
   version: old

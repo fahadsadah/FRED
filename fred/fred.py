@@ -8,7 +8,7 @@ config_f = open('config.yaml')
 config = yaml.safe_load(config_f)
 config_f.close()
 
-mqttc = mosquitto.Mosquitto(config['door']['mqtt_name'])
+mqttc = mosquitto.Mosquitto(config['mqtt_name'])
 mqttc.connect("alfred", 1883, 60, True)
 
 ser = serial.Serial("/dev/alfie", 9600, timeout=0.5)
