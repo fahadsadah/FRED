@@ -1,5 +1,5 @@
-mqtt_name: alfred_outer
-door:
+mqtt:
+  server: alfred
   name: outer
 hardware:
   version: old
